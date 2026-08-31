@@ -1,0 +1,60 @@
+/* Estilo Geral */
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+/* Cabeçalho e Rodapé */
+header, footer {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    margin: 0 10px;
+}
+
+/* Seletor 1: :hover */
+nav a:hover {
+    color: yellow;
+}
+
+/* Layout: Conteúdo e Barra Lateral lado a lado */
+.container {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+main {
+    flex: 3;
+}
+
+aside {
+    flex: 1;
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ccc;
+}
+
+section {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+}
+
+/* Seletor 2: :target (destaca seção ao clicar no link interno) */
+section:target {
+    border-color: orange;
+    background-color: #fffae6;
+}
+
+/* Seletor 3: link externo */
+a[target="_blank"] {
+    color: green;
+}
