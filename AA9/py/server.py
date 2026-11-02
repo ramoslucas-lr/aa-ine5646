@@ -18,9 +18,6 @@ import ssl
 import signal
 from simple_websocket_server import WebSocketServer, WebSocket
 
-# ---------------------------------------------------------------------------
-# Configurações
-# ---------------------------------------------------------------------------
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.dirname(CURRENT_DIR)
 DEFAULT_TMP_DIR = os.path.join(BASE_DIR, 'tmp') + os.sep
@@ -35,29 +32,17 @@ BUFFER_SIZE = 1024
 TCP_PORT = 8080
 UDP_PORT = 8081
 WEBSOCKET_PORT = 8082
-HOST = '0.0.0.0'  # TCP/UDP escutam em todas as interfaces
+HOST = '0.0.0.0'
 
-# Host do WebSocket.
-# 127.0.0.1 (via SetEnv WS_WS_HOST 127.0.0.1), para a 8082 não ficar exposta.
 WEBSOCKET_HOST = os.environ.get('WS_WS_HOST', '127.0.0.1')
-
-# TLS do WebSocket (wss direto no 8082). Se SSL_CERT/SSL_KEY estiverem definidos
-# (via SetEnv no Apache), o server.py faz TLS -> TLS FIM A FIM atrás do proxy.
 SSL_CERT = os.environ.get('WS_SSL_CERT')
 SSL_KEY = os.environ.get('WS_SSL_KEY')
 
-# Arquivo para registro de atividade
 ACTIVITY_FILE = os.path.join(PATH, 'message_server_activity.txt')
 PID_FILE = os.path.join(PATH, 'message_server.pid')
 
-# Encerra o servidor após este tempo (s) SEM mensagens TCP/UDP (inatividade).
-# A página mostra uma contagem regressiva sincronizada. 0 = nunca encerra.
 INACTIVITY_LIMIT = int(os.environ.get('WS_INACTIVITY', '180'))
-TCP_IDLE_TIMEOUT = 180  # s: fecha conexão TCP ociosa (evita vazar thread 24/7)
-
-# Logs verbosos só quando WS_DEBUG=1. Em produção (padrão) o servidor fica
-# "quieto" — assim o server.log NÃO cresce com o servidor rodando 24/7.
-# Mensagens de ERRO são sempre exibidas.
+TCP_IDLE_TIMEOUT = 180
 DEBUG = os.environ.get('WS_DEBUG', '0') == '1'
 
 running = True
@@ -159,9 +144,7 @@ def handle_tcp_client(conn, addr):
             log(f"TCP recebido de {client_ip}:{client_port}: {msg_str}")
             broadcast(payload)
 
-            response = f"ACK: {msg_str}".encode('utf-8')
-            conn.sendall(response)
-
+            conn.sendall(f"ACK: {msg_str}".encode('utf-8'))
             if msg_str.lower() in ['exit', 'quit']:
                 break
     except Exception as e:
@@ -224,8 +207,7 @@ def udp_server_loop():
             log(f"UDP recebido de {client_ip}:{client_port}: {msg_str}")
             broadcast(payload)
 
-            reply = f"ACK: {msg_str}".encode('utf-8')
-            s.sendto(reply, addr)
+            s.sendto(f"ACK: {msg_str}".encode('utf-8'), addr)
         except socket.timeout:
             continue
         except Exception as e:
