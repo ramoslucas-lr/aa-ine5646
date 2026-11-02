@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- Metadata -->
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Monitor de Mensagens TCP/UDP (HTTPS + WebSocket Secure)">
+    <!-- >>> ALTERE: informe o(s) autor(es) <<< -->
+    <meta name="author" content="Insira o(s) autor(es)">
+
+    <!-- CSS (caminho relativo: funciona na raiz e em subdiretório /AA/AAx/) -->
+    <link rel="stylesheet" href="css/wss.css">
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Title -->
+    <title>Monitor de Mensagens TCP/UDP</title>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>Monitor de Mensagens TCP/UDP</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="server-status">
+            <div class="status-indicator">
+                <span class="status-dot status-offline" id="statusDot"></span>
+                <span id="statusText">Verificando status do servidor...</span>
+            </div>
+            <div class="server-controls">
+                <button id="startServer">Iniciar Servidor</button>
+                <button id="stopServer">Parar Servidor</button>
+                <button id="clearMessages">Limpar Mensagens</button>
+            </div>
+        </div>
+
+        <!-- Contador de inatividade (mostrado quando o servidor está online) -->
+        <div class="inactivity-timer" id="inactivityTimer" style="display:none;">
+            <span class="inactivity-icon">&#9201;</span>
+            <span class="inactivity-text">Encerramento automático por inatividade em</span>
+            <span class="inactivity-value" id="inactivityValue">--:--</span>
+        </div>
+
+        <div class="connection-stats">
+            <div class="stat-card">
+                <h3>Mensagens TCP</h3>
+                <div class="count" id="tcpCount">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Mensagens UDP</h3>
+                <div class="count" id="udpCount">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Total de Mensagens</h3>
+                <div class="count" id="totalCount">0</div>
+            </div>
+        </div>
+
+        <div class="messages-container">
+            <div class="message-tabs">
+                <div class="tab active" data-filter="all">Todas</div>
+                <div class="tab" data-filter="tcp">TCP</div>
+                <div class="tab" data-filter="udp">UDP</div>
+            </div>
+            <div class="message-list" id="messageList">
+                <div class="no-messages" id="noMessages">
+                    Nenhuma mensagem recebida ainda. Conecte clientes TCP/UDP para receber mensagens.
+                </div>
+            </div>
+        </div>
+
+
+        <div class="debug-toggle" id="debugToggle">Exibir Informações de Depuração</div>
+        <div class="debug-info" id="debugInfo"></div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <!-- >>> ALTERE: troque "Autor(es)" pelo(s) nome(s) do grupo <<< -->
+            <p style="font-size: 10pt">Servidor Combinado TCP/UDP com WebSocket Seguro (WSS) &ndash; Autor(es) &ndash; INE/UFSC &ndash; <span id="currentYear"></span></p>
+        </div>
+    </footer>
+
+    <!-- JS (caminho relativo) -->
+    <script src="js/wss.js"></script>
+</body>
+
+</html>
