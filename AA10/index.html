@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Lais Portela e Lucas Ramos">
+    <title>AA10 — Cadastro e Localidades</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>UFSC · Programação Web · AA10</h1>
+    </header>
+
+    <main>
+        <section id="secao-cadastro" hidden>
+            <h2>🖂 Criar nova conta</h2>
+            <form id="form-cadastro" novalidate>
+                
+                <div class="campo-grupo">
+                    <label for="nome">Nome:</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="nome" name="nome" required>
+                        <span class="icon-check" id="check-nome">✔️</span>
+                    </div>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="sobrenome">Sobrenome:</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="sobrenome" name="sobrenome" required>
+                        <span class="icon-check" id="check-sobrenome">✔️</span>
+                    </div>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="cpf">CPF:</label>
+                    <input type="text" id="cpf" name="cpf" required>
+                    <span id="msg-cpf" class="msg-erro-inline"></span>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha" minlength="6" required>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="repita-senha">Repita sua senha:</label>
+                    <input type="password" id="repita-senha" name="repita-senha" minlength="6" required>
+                    <span id="msg-senha" class="msg-erro-inline"></span>
+                </div>
+
+                <hr class="divisor">
+
+                <div class="campo-grupo">
+                    <label for="cep">CEP</label>
+                    <div class="input-duplo">
+                        <input type="text" id="cep" name="cep" maxlength="9" placeholder="00000-000" required inputmode="numeric">
+                        <span class="help-text">00000-000</span>
+                    </div>
+                    <span id="msg-cep" class="msg-erro-inline"></span>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="logradouro">Logradouro</label>
+                    <div class="input-duplo">
+                        <input type="text" id="logradouro" name="logradouro">
+                        <span class="help-text">Rua.</span>
+                    </div>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="bairro">Bairro</label>
+                    <div class="input-duplo">
+                        <input type="text" id="bairro" name="bairro">
+                        <span class="help-text">Bairro</span>
+                    </div>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="cidade">Cidade</label>
+                    <div class="input-duplo">
+                        <input type="text" id="cidade" name="cidade">
+                        <span class="help-text">Cidade</span>
+                    </div>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="estado">Estado</label>
+                    <div class="input-duplo">
+                        <input type="text" id="estado" name="estado" maxlength="2">
+                        <span class="help-text">UF</span>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="btn-cadastrar">Criar conta</button>
+                </div>
+                <p id="msg-cadastro" class="msg-erro"></p>
+                <p style="text-align: center; margin-top: 1rem;">Já tem conta? <a href="login.html">Fazer login</a></p>
+            </form>
+        </section>
+
+        <section id="secao-localidades" hidden>
+            <h2>Consulta de Localidades (IBGE)</h2>
+            <p id="boas-vindas"></p>
+
+            <div class="campo-grupo">
+                <label>UF</label>
+                <select id="select-uf">
+                    <option value="">Carregando UFs...</option>
+                </select>
+            </div>
+
+            <div class="campo-grupo">
+                <label>Município</label>
+                <select id="select-municipio" disabled>
+                    <option value="">Selecione uma UF primeiro</option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" id="btn-logout">Sair</button>
+            </div>
+        </section>
+
+        <p id="msg-loading">Verificando sessão...</p>
+    </main>
+
+    <footer>
+        <p>Desenvolvido por: <strong>Lais Portela</strong> e <strong>Lucas Ramos</strong> — AA10 / UFSC</p>
+    </footer>
+
+    <script src="js/cadastro.js"></script>
+    <script src="js/login-helper.js"></script>
+    <script src="js/localidades.js"></script>
+</body>
+</html>
